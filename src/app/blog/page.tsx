@@ -1,8 +1,19 @@
 import Link from "next/link";
-import { posts } from "@/posts";
+import getPosts from "@/lib/getPosts";
 
 export default async function Page() {
-  //const posts = await getPosts()
+  const posts = await getPosts();
+
+  console.log(posts);
+
+  if (posts.length === 0) {
+    return (
+      <div className="flex flex-col flex-1 gap-5">
+        <h1 className="font-extrabold text-xl">Exit Strategies</h1>
+        <p>No posts yet.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col flex-1 gap-5">
