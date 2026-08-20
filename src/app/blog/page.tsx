@@ -23,8 +23,8 @@ export default async function Page() {
           <li key={post.id} className="flex flex-row gap-5">
             <span>
               <i>
-                <time dateTime={post.publishedAt?.toISOString()}>
-                  {post.publishedAt?.toLocaleDateString("en-US", {
+                <time dateTime={post.updatedAt?.toISOString()}>
+                  {post.updatedAt?.toLocaleDateString("en-US", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
@@ -39,10 +39,5 @@ export default async function Page() {
         ))}
       </ul>
     </div>
-    // <ul>
-    //   {posts.map((post) => (
-    //     <Post key={post.id} post={post} />
-    //   ))}
-    // </ul>
   );
 }

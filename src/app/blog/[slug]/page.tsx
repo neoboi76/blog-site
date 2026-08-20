@@ -1,4 +1,7 @@
-import { posts } from "@/posts";
+import PostContent from "@/components/PostContent";
+import { prisma } from "@/lib/prisma";
+import { notFound } from "next/navigation";
+//import { posts } from "@/posts";
 
 export default async function Page({
   params,
@@ -6,7 +9,11 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = posts.find((p) => p.slug === slug);
+  const post = await prisma.post.findUnique({
+    where: { slug: slug },
+  });
+
+  if (!post) notFound();
 
   return (
     <div className="flex flex-col gap-10">
@@ -23,13 +30,7 @@ export default async function Page({
               })}
             </time>
           </i>
-          <div className="prose lg:prose-xl text-amber-50">
-            {post?.content.split("\n\n").map((paragraph, i) => (
-              <p key={i} className="">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+          <PostContent content={post?.content} />
         </span>
       </div>
     </div>
