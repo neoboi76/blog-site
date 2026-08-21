@@ -15,7 +15,7 @@ async function main() {
         id: post.id,
         title: post.title,
         slug: post.slug,
-        content: post.content,
+        content: post.content as any,
         published: post.published,
         publishedAt: post.publishedAt,
         createdAt: post.createdAt,

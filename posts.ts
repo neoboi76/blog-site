@@ -5,7 +5,7 @@ export type Post = {
     title: string,
     slug: string,
     content: Prisma.JsonValue,
-    published: Boolean,
+    published: boolean,
     publishedAt?: Date,
     createdAt: Date,
     UpdatedAt: Date
