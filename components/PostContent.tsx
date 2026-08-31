@@ -18,7 +18,7 @@ export default function PostContent({ content }: { content: any }) {
 
   return (
     <div
-      className="prose lg:prose-xl [&_*]:!text-white"
+      className="prose lg:prose-lg [&_*]:!text-white"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   );

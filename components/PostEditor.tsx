@@ -22,7 +22,7 @@ export default function PostEditor({
         onChange={(e) => setTitle(e.target.value)}
         className="w-full px-4 py-3 text-2xl font-bold bg-transparent border-b border-foreground/10 focus:outline-none placeholder:text-foreground/40"
       />
-      <div className="min-h-[400px] max-h-[70vh] overflow-y-auto font-sans">
+      <div className="min-h-[400px] w-3xl overflow-y-auto font-sans">
         <BlockNoteView editor={editor} />
       </div>
       <div className="flex justify-end border-t border-foreground/10 p-3">

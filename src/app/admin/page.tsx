@@ -1,4 +1,3 @@
-// app/admin/page.tsx
 "use client";
 
 import { createPost } from "@/lib/savePost";
@@ -10,8 +9,7 @@ const PostEditor = dynamic(() => import("@/components/PostEditor"), {
 
 export default function Page() {
   const handleSave = async (data: { title: string; content: any }) => {
-    const post = await createPost(data);
-    console.log(post);
+    await createPost(data);
   };
 
   return <PostEditor onSave={handleSave} />;
