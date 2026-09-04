@@ -1,34 +1,34 @@
 import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
-import { PrismaClient } from "../src/generated/prisma/client";
+import { Prisma, PrismaClient } from "../src/generated/prisma/client";
 import { posts } from "../posts";
 
 const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  for (const post of posts) {
-    await prisma.post.upsert({
-      where: { slug: post.slug },
-      update: {},
-      create: {
-        id: post.id,
-        title: post.title,
-        slug: post.slug,
-        content: post.content as any,
-        published: post.published,
-        publishedAt: post.publishedAt,
-        createdAt: post.createdAt,
-        updatedAt: post.UpdatedAt,
-      },
-    });
-  }
+    for (const post of posts) {
+        await prisma.post.upsert({
+            where: { slug: post.slug },
+            update: {},
+            create: {
+                id: post.id,
+                title: post.title,
+                slug: post.slug,
+                content: post.content as Prisma.InputJsonValue,
+                published: post.published,
+                publishedAt: post.publishedAt,
+                createdAt: post.createdAt,
+                updatedAt: post.updatedAt,
+            },
+        });
+    }
 }
 
 main()
-  .then(() => prisma.$disconnect())
-  .catch((e) => {
-    console.error(e);
-    prisma.$disconnect();
-    process.exit(1);
-  });
+    .then(() => prisma.$disconnect())
+    .catch((e) => {
+        console.error(e);
+        prisma.$disconnect();
+        process.exit(1);
+    });

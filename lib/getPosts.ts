@@ -6,6 +6,4 @@ export default async function getPosts() {
         orderBy: { updatedAt: "desc" },
     });
     return posts;
-
-
 }

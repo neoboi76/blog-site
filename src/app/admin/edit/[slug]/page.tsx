@@ -1,16 +1,24 @@
 import { prisma } from "@/lib/prisma";
+import type { Block } from "@blocknote/core";
 import { notFound } from "next/navigation";
 import EditPostClient from "./EditPostClient";
 
 export default async function EditPage({
-  params,
+    params,
 }: {
-  params: Promise<{ slug: string }>;
+    params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
-  const post = await prisma.post.findUnique({ where: { slug } });
+    const { slug } = await params;
+    const post = await prisma.post.findUnique({ where: { slug } });
 
-  if (!post) notFound();
+    if (!post) notFound();
 
-  return <EditPostClient post={post} />;
+    return (
+        <EditPostClient
+            post={{
+                ...post,
+                content: post.content as Block[],
+            }}
+        />
+    );
 }
